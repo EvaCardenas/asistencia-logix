@@ -11,8 +11,8 @@ from pathlib import Path
 Path("salida").mkdir(exist_ok=True)
 
 # Leer los archivos desde la carpeta 'data'
-archivo_excel_1 = pd.ExcelFile('data/Reporte_Almacén_Asistencia 31-07.xlsx')
-archivo_excel_2 = pd.ExcelFile('data/Reporte_Citas_20250731_0939.xlsx')
+archivo_excel_1 =pd.ExcelFile( "Z:/ASISTENCIA/Reporte_Almacén_Asistencia 31-07.xlsx")
+archivo_excel_2 = pd.ExcelFile("Z:/ASISTENCIA/Reporte_Citas_20250731_1153.xlsx")
 
 hoja_nombre = 'REPORTE CITAS'.strip()
 
