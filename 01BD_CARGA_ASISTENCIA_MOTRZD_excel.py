@@ -6,6 +6,7 @@
 
 import pandas as pd
 from pathlib import Path
+from datetime import datetime  # ✅ Asegúrate de incluir esto
 
 # Crear carpeta de salida si no existe
 Path("salida").mkdir(exist_ok=True)
