@@ -33,7 +33,7 @@ jobs:
           RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
         run: |
           echo "$RCLONE_CONF" > rclone.conf
-          rclone --config rclone.conf copy "bd_logix:ASISTENCIA/Reporte_Citas_20250731_0939.xlsx" data/
+          rclone --config rclone.conf copy "bd_logix:ASISTENCIA/Reporte_Citas_20250731_1153.xlsx" data/
           rclone --config rclone.conf copy "bd_logix:ASISTENCIA/Reporte_Almacén_Asistencia 31-07.xlsx" data/
       - name: 📂 Verificar archivos descargados
         run: ls -lh data/
