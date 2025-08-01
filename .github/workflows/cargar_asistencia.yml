@@ -2,7 +2,7 @@ name: Cargar Asistencia Motorizado
 
 on:
   schedule:
-    - cron: '40 1 * * *'  # 20:40 Perú (UTC-5) = 01:40 UTC
+    - cron: '30 13 * * *'  # 8:30 a.m. Perú = 13:30 UTC
   workflow_dispatch:
 
 jobs:
@@ -13,17 +13,20 @@ jobs:
       - name: 📥 Clonar repositorio
         uses: actions/checkout@v3
 
-      - name: 📦 Instalar Python
+      - name: 📦 Instalar Python y dependencias
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
       - name: 📦 Instalar librerías necesarias
+        run: pip install pandas openpyxl
+
+      - name: 📦 Instalar rclone
         run: |
-          pip install pandas openpyxl
+          curl https://rclone.org/install.sh | sudo bash
 
       - name: 📁 Crear carpeta data/
-        run: mkdir -p data salida
+        run: mkdir data
 
       - name: 📥 Descargar archivos desde OneDrive con rclone
         env:
