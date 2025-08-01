@@ -1,0 +1,46 @@
+name: Cargar Asistencia Motorizado
+
+on:
+  schedule:
+    - cron: '40 1 * * *'  # 20:40 Perú (UTC-5) = 01:40 UTC
+  workflow_dispatch:
+
+jobs:
+  procesar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: 📦 Instalar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Instalar librerías necesarias
+        run: |
+          pip install pandas openpyxl
+
+      - name: 📁 Crear carpeta data/
+        run: mkdir -p data salida
+
+      - name: 📥 Descargar archivos desde OneDrive con rclone
+        env:
+          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+        run: |
+          echo "$RCLONE_CONF" > rclone.conf
+          rclone --config rclone.conf copy "bd_logix:ASISTENCIA/Reporte_Citas_20250731_0939.xlsx" data/
+          rclone --config rclone.conf copy "bd_logix:ASISTENCIA/Reporte_Almacén_Asistencia 31-07.xlsx" data/
+
+      - name: ▶️ Ejecutar script Python
+        run: python 01BD_CARGA_ASISTENCIA_MOTRZD_excel.py
+
+      - name: 📤 Subir resultado a OneDrive
+        env:
+          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+        run: |
+          echo "$RCLONE_CONF" > rclone.conf
+          FECHA=$(date +'%Y-%m-%d')
+          ARCHIVO="df_merged_motorizado_$FECHA.xlsx"
+          rclone --config rclone.conf copy "salida/$ARCHIVO" "bd_logix:ASISTENCIA/RESULTADOS/" --create-empty-src-dirs
