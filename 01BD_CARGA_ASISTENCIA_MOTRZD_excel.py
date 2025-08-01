@@ -12,8 +12,8 @@ from datetime import datetime  # ✅ Asegúrate de incluir esto
 Path("salida").mkdir(exist_ok=True)
 
 # Leer los archivos desde la carpeta 'data'
-archivo_excel_1 =pd.ExcelFile( "data/Reporte_Almacén_Asistencia 31-07.xlsx")
-archivo_excel_2 = pd.ExcelFile("data/Reporte_Citas_20250731_1153.xlsx")
+archivo_excel_1 =pd.ExcelFile( "data/Reporte_Almacén_Asistencia.xlsx")
+archivo_excel_2 = pd.ExcelFile("data/1.xlsx")
 
 hoja_nombre = 'REPORTE CITAS'.strip()
 
