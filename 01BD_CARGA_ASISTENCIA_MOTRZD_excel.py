@@ -33,8 +33,6 @@ print(df_1.head())
 # Asegurarse de que la hoja 'REPORTE CITAS' esté presente, eliminando espacios extras
 hoja_nombre = 'REPORTE CITAS'.strip()
 
-df_2 = archivo_excel_2.parse(hoja_nombre)
-
 # Asegurarse de que la columna 'FECHA_ENTREGA' tiene el formato numérico de Excel
 # Convertir el número de serie de Excel a fecha datetime
 df_2['FECHA_ENTREGA'] = pd.to_datetime(df_2['FECHA_ENTREGA'], unit='D', origin='1900-01-01')
