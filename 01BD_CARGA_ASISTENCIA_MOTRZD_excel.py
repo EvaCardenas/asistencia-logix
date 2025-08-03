@@ -34,12 +34,11 @@ print(df_1.head())
 hoja_nombre = 'REPORTE CITAS'.strip()
 df_2 = archivo_excel_2.parse(hoja_nombre)
 
-# Asegurarse de que la columna 'FECHA_ENTREGA' tiene el formato numérico de Excel
-# Convertir el número de serie de Excel a fecha datetime
-df_2['FECHA_ENTREGA'] = pd.to_datetime(df_2['FECHA_ENTREGA'], unit='D', origin='1900-01-01')
-
-# Cambiar el formato a 'día/mes/año'
-df_2['FECHA_ENTREGA'] = df_2['FECHA_ENTREGA'].dt.strftime('%d/%m/%Y')
+# Si son números (formato Excel tipo 45234)
+if pd.api.types.is_numeric_dtype(df_2['FECHA_ENTREGA']):
+    df_2['FECHA_ENTREGA'] = pd.to_datetime(df_2['FECHA_ENTREGA'], unit='D', origin='1900-01-01')
+else:
+    df_2['FECHA_ENTREGA'] = pd.to_datetime(df_2['FECHA_ENTREGA'], errors='coerce')
 
 # Verificar el resultado
 print(df_2['FECHA_ENTREGA'].head(10))
