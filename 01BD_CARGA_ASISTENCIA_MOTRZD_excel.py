@@ -44,9 +44,6 @@ df_2['FECHA_ENTREGA'] = df_2['FECHA_ENTREGA'].dt.strftime('%d/%m/%Y')
 # Verificar el resultado
 print(df_2['FECHA_ENTREGA'].head(10))
 
-# Verificar las hojas en el archivo Excel
-print(archivo_excel_2.sheet_names)
-
 hoja_nombre = 'REPORTE CITAS'.strip()
 
 # Asegurarse de que la hoja exista
