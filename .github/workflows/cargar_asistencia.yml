@@ -2,7 +2,7 @@ name: Cargar Asistencia Motorizado
 
 on:
   schedule:
-    - cron: '0 15 * * *'
+    - cron: '30 15 * * *'  # 10:30 a.m. Perú (UTC-5)
   workflow_dispatch:
 
 jobs:
